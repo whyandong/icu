@@ -1,0 +1,18 @@
+Origin: uniontech
+Reviewed-By: lutianyu@uniontech.com
+Last-Update: 2021-02-19
+
+--- icu-63.1.orig/source/test/Makefile.in
++++ icu-63.1/source/test/Makefile.in
+@@ -32,7 +32,11 @@ STATUS_FULL = $(shell pwd)/$(STATUS_TMP)
+ ## Files to remove for 'make clean'
+ CLEANFILES = *~ $(STATUS_TMP)
+ 
++ifeq ($(shell uname -m), sw_64)
++SUBDIRS = $(TESTDATA) $(IOTEST) $(LETEST)
++else
+ SUBDIRS = $(TESTDATA) intltest $(IOTEST) cintltst $(LETEST)
++endif
+ 
+ ## List of phony targets
+ .PHONY : everything all all-local all-recursive install install-local		\
